@@ -12,16 +12,23 @@ let sBtn = document.querySelector ("#login-btn input");
 async function signUp(e){
     e.preventDefault();
 
+    if (!sUName.value.trim() || 
+        !sEmail.value.trim() || 
+        !sPass.value.trim() || 
+       !sPhn.value.trim()) 
+    {
+        Swal.fire({
+            title: "All fields required!",
+            text: "Please fill all fields before signup.",
+            icon: "warning"
+        })
+     return
+    };
+
     try {
 
-      if(!sEmail){
-        alert ("please enter your email");
-        return
-      }
-      if(!sPass){
-        alert ("please enter your password")
-        return
-      }
+   
+       
         const { data, error } = await supaBase.auth.signUp(
   {
     email: sEmail.value,
